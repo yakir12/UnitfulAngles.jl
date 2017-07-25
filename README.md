@@ -21,8 +21,8 @@ julia> sin(30u"my°")
 julia> cos(π*u"myRad")
 -1.0
 
-julia> sin(1u"quadrant")
-1.0
+julia> tan(1u"octant")
+0.9999999999999999
 ```
 We excluded the `d` versions of these functions (e.g. `sind`) to keep things simple (and to avoid overriding any intended behavior by the user). 
 
