@@ -17,7 +17,7 @@ import Base: sin, cos, tan, sec, csc, cot, asin, acos, atan, asec, acsc, acot, a
 @unit octant        "octant"        Octant        turn//8       false
 @unit clockPosition "clockPosition" ClockPosition turn//12      false
 @unit hourAngle     "hourAngle"     HourAngle     turn//24      false
-@unit compasPoint   "compasPoint"   CompasPoint   turn//32      false
+@unit compassPoint  "compassPoint"  CompassPoint  turn//32      false
 @unit hexacontade   "hexacontade"   Hexacontade   turn//60      false
 @unit brad          "brad"          BinaryRadian  turn//256     false
 @unit my°           "my°"           MyDegree      turn//360     false
@@ -28,34 +28,34 @@ import Base: sin, cos, tan, sec, csc, cot, asin, acos, atan, asec, acsc, acot, a
 
 ######################### Functions ############################################
 
-# cos and sin have their *pi versions, and their *d versions
+# cos and sin have *pi versions, and *d versions
 for _f in (:cos, :sin)
     @eval $_f{T}(x::Quantity{T,typeof(NoDims),typeof(halfTurn)}) = $(Symbol("$(_f)pi"))(ustrip(x))
     @eval $_f{T}(x::Quantity{T,typeof(NoDims),typeof(my°)}) = $(Symbol("$(_f)d"))(ustrip(x))
     @eval $_f{T}(x::Quantity{T,typeof(NoDims),typeof(myRad)}) = $_f(ustrip(x))
     @eval $_f{T}(x::Quantity{T,typeof(NoDims),typeof(diameterPart)}) = $_f(ustrip(uconvert(myRad, x)))
-    for _x in (turn, quadrant, sextant, octant, clockPosition, hourAngle, compasPoint, hexacontade, brad, grad, arcminute, arcsecond)
+    for _x in (turn, quadrant, sextant, octant, clockPosition, hourAngle, compassPoint, hexacontade, brad, grad, arcminute, arcsecond)
         @eval $_f{T}(x::Quantity{T,typeof(NoDims),typeof($_x)}) = $(Symbol("$(_f)pi"))(ustrip(uconvert(halfTurn, x)))
     end
 end
 
-# these functions don't have *pi versions, but have their *d versions
+# These functions don't have *pi versions, but have *d versions
 for _f in (:tan, :sec, :csc, :cot)
     @eval $_f{T}(x::Quantity{T,typeof(NoDims),typeof(my°)}) = $(Symbol("$(_f)d"))(ustrip(x))
     @eval $_f{T}(x::Quantity{T,typeof(NoDims),typeof(myRad)}) = $_f(ustrip(x))
-    for _x in (turn, halfTurn, quadrant, sextant, octant, clockPosition, hourAngle, compasPoint, hexacontade, brad, diameterPart, grad, arcminute, arcsecond)
+    for _x in (turn, halfTurn, quadrant, sextant, octant, clockPosition, hourAngle, compassPoint, hexacontade, brad, diameterPart, grad, arcminute, arcsecond)
         @eval $_f{T}(x::Quantity{T,typeof(NoDims),typeof($_x)}) = $_f(ustrip(uconvert(myRad, x)))
     end
 end
 
-# invesre functions
+# Inverse functions
 for _f in (:acos, :asin, :atan, :asec, :acsc, :acot)
     # @eval $(Symbol("arc$(_f)"))(x::Number) = $(Symbol("a$(_f)"))(x)*myRad
     @eval $_f(T::FreeUnits, x::Number) = uconvert(T, $_f(x)*myRad)
 end
 atan2(T::FreeUnits, y::Number, x::Number) = uconvert(T, atan2(y, x)*myRad)
 
-# fun conversion between time and angles
+# Fun conversion between time and angles
 # NOTE: not sure if to use `convert` or `uconvert`
 function convert(T::FreeUnits, t::Dates.Time)
     x = t - Dates.Time(0,0,0)
@@ -65,10 +65,7 @@ end
 convert(::Type{Dates.Time}, x::Quantity) = Dates.Time(0,0,0) + Dates.Nanosecond(round(Int, ustrip(uconvert(hourAngle, x))*3600000000000))
 
 
-
-
-
-# as per the Unitful documents
+# As per the Unitful documentation
 const localunits = Unitful.basefactors
 function __init__()
     merge!(Unitful.basefactors, localunits)
