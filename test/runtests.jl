@@ -2,7 +2,7 @@ using UnitfulAngles
 using Unitful
 using Base.Test
 
-units = (u"turn", u"halfTurn", u"quadrant", u"sextant", u"octant", u"clockPosition", u"hourAngle", u"compasPoint", u"hexacontade", u"brad", u"my°", u"grad", u"arcminute", u"arcsecond", u"myRad", u"diameterPart")
+units = (u"turn", u"halfTurn", u"quadrant", u"sextant", u"octant", u"clockPosition", u"hourAngle", u"compassPoint", u"hexacontade", u"brad", u"my°", u"grad", u"arcminute", u"arcsecond", u"myRad", u"diameterPart")
 quantities = (1, 2, 4, 6, 8, 12, 24, 32, 60, 256, 360, 400, 21600, 1296000, 2π, 120π)
 
 @test all(1u"turn" == q*u for (q, u) in zip(quantities, units))
