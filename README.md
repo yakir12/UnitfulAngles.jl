@@ -8,10 +8,11 @@
 
 A supplemental units package for `Unitful.jl`.
 
-`UnitfulAngles.jl` introduces all the angular units found in the wikipedia [angle-article](https://en.wikipedia.org/wiki/Angle#Units). These include: `Turn`, `HalfTurn`, `Quadrant`, `Sextant`, `MyRadian`, `Octant`, `ClockPosition`, `HourAngle`, `CompasPoint`, `Hexacontade`, `BinaryRadian`, `MyDegree`, `DiameterPart`, `Gradian`, `Arcminute`, and `Arcsecond`.
+`UnitfulAngles.jl` introduces all the angular units found in the wikipedia [angle-article](https://en.wikipedia.org/wiki/Angle#Units). These include: `Turn`, `HalfTurn`, `Quadrant`, `Sextant`, `MyRadian`, `Octant`, `ClockPosition`, `HourAngle`, `CompassPoint`, `Hexacontade`, `BinaryRadian`, `MyDegree`, `DiameterPart`, `Gradian`, `Arcminute`, and `Arcsecond`.
 
 ## Special features
-- all the trigonometric functions (`sin`, `sinc`, `cos`, `cosc`, `tan`, `sec`, `csc`, and `cot`) work as expected:
+
+- All the trigonometric functions (`sin`, `sinc`, `cos`, `cosc`, `tan`, `sec`, `csc`, and `cot`) work as expected:
 ```julia
 julia> using Unitful, UnitfulAngles
 
@@ -24,7 +25,8 @@ julia> cos(π*u"myRad")
 julia> tan(1u"octant")
 0.9999999999999999
 ```
-We excluded the `d` versions of these functions (e.g. `sind`) to keep things simple (and to avoid overriding any intended behavior by the user). 
+We excluded the `d` versions of these functions (e.g. `sind`) to keep things simple
+(and to avoid overriding any intended behavior by the user). 
 
 - In order to get inverse functions (`acos`, `acot`, `acsc`, `asec`, `asin`, `atan`, and `atan2`) to return a specific unit, specify the desired unit as the first argument: 
 ```julia
