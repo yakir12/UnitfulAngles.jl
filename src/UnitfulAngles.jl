@@ -5,23 +5,24 @@ module UnitfulAngles
 using Unitful
 using Unitful: @unit, Quantity, NoDims, FreeUnits
 import Base: sin, cos, tan, sec, csc, cot, asin, acos, atan, asec, acsc, acot, atan2, convert
+export @u_str
 
 # export arcsin, arccos, arctan, arcsec, arccsc, arccot, arctan2
 
 ######################### Angle units ##########################################
-@unit turn          "τ"             Turn          1             false
+@unit turn          "τ"             Turn          2π*u"rad"       false
 @unit halfTurn      "π"             HalfTurn      turn//2       false
 @unit quadrant      "⦜"             Quadrant      turn//4       false
 @unit sextant       "sextant"       Sextant       turn//6       false
-@unit myRad         "myRad"         MyRadian      turn/2π       false
+# @unit myRad         "myRad"         MyRadian      turn/2π       false
 @unit octant        "octant"        Octant        turn//8       false
 @unit clockPosition "clockPosition" ClockPosition turn//12      false
 @unit hourAngle     "hourAngle"     HourAngle     turn//24      false
 @unit compassPoint  "compassPoint"  CompassPoint  turn//32      false
 @unit hexacontade   "hexacontade"   Hexacontade   turn//60      false
 @unit brad          "brad"          BinaryRadian  turn//256     false
-@unit my°           "my°"           MyDegree      turn//360     false
-@unit diameterPart  "diameterPart"  DiameterPart  myRad/60      false
+# @unit my°           "my°"           MyDegree      turn//360     false
+@unit diameterPart  "diameterPart"  DiameterPart  1u"rad"/60    false
 @unit grad          "ᵍ"             Gradian       turn//400     false
 @unit arcminute     "′"             Arcminute     turn//21600   false
 @unit arcsecond     "″"             Arcsecond     turn//1296000 false
@@ -31,9 +32,9 @@ import Base: sin, cos, tan, sec, csc, cot, asin, acos, atan, asec, acsc, acot, a
 # cos and sin have *pi versions, and *d versions
 for _f in (:cos, :sin)
     @eval $_f{T}(x::Quantity{T,typeof(NoDims),typeof(halfTurn)}) = $(Symbol("$(_f)pi"))(ustrip(x))
-    @eval $_f{T}(x::Quantity{T,typeof(NoDims),typeof(my°)}) = $(Symbol("$(_f)d"))(ustrip(x))
-    @eval $_f{T}(x::Quantity{T,typeof(NoDims),typeof(myRad)}) = $_f(ustrip(x))
-    @eval $_f{T}(x::Quantity{T,typeof(NoDims),typeof(diameterPart)}) = $_f(ustrip(uconvert(myRad, x)))
+    # @eval $_f{T}(x::Quantity{T,typeof(NoDims),typeof(u"°")}) = $(Symbol("$(_f)d"))(ustrip(x))
+    # @eval $_f{T}(x::Quantity{T,typeof(NoDims),typeof(u"rad")}) = $_f(ustrip(x))
+    @eval $_f{T}(x::Quantity{T,typeof(NoDims),typeof(diameterPart)}) = $_f(ustrip(uconvert(u"rad", x)))
     for _x in (turn, quadrant, sextant, octant, clockPosition, hourAngle, compassPoint, hexacontade, brad, grad, arcminute, arcsecond)
         @eval $_f{T}(x::Quantity{T,typeof(NoDims),typeof($_x)}) = $(Symbol("$(_f)pi"))(ustrip(uconvert(halfTurn, x)))
     end
@@ -41,19 +42,20 @@ end
 
 # These functions don't have *pi versions, but have *d versions
 for _f in (:tan, :sec, :csc, :cot)
-    @eval $_f{T}(x::Quantity{T,typeof(NoDims),typeof(my°)}) = $(Symbol("$(_f)d"))(ustrip(x))
-    @eval $_f{T}(x::Quantity{T,typeof(NoDims),typeof(myRad)}) = $_f(ustrip(x))
-    for _x in (turn, halfTurn, quadrant, sextant, octant, clockPosition, hourAngle, compassPoint, hexacontade, brad, diameterPart, grad, arcminute, arcsecond)
-        @eval $_f{T}(x::Quantity{T,typeof(NoDims),typeof($_x)}) = $_f(ustrip(uconvert(myRad, x)))
+    # @eval $_f{T}(x::Quantity{T,typeof(NoDims),typeof(u"°")}) = $(Symbol("$(_f)d"))(ustrip(x))
+    # @eval $_f{T}(x::Quantity{T,typeof(NoDims),typeof(u"rad")}) = $_f(ustrip(x))
+    @eval $_f{T}(x::Quantity{T,typeof(NoDims),typeof(diameterPart)}) = $_f(ustrip(uconvert(u"rad", x)))
+    for _x in (turn, halfTurn, quadrant, sextant, octant, clockPosition, hourAngle, compassPoint, hexacontade, brad, grad, arcminute, arcsecond)
+        @eval $_f{T}(x::Quantity{T,typeof(NoDims),typeof($_x)}) = $(Symbol("$(_f)d"))(ustrip(uconvert(u"°", x)))
     end
 end
 
 # Inverse functions
 for _f in (:acos, :asin, :atan, :asec, :acsc, :acot)
-    # @eval $(Symbol("arc$(_f)"))(x::Number) = $(Symbol("a$(_f)"))(x)*myRad
-    @eval $_f(T::FreeUnits, x::Number) = uconvert(T, $_f(x)*myRad)
+    # @eval $(Symbol("arc$(_f)"))(x::Number) = $(Symbol("a$(_f)"))(x)*u"rad"
+    @eval $_f(T::FreeUnits, x::Number) = uconvert(T, $_f(x)*u"rad")
 end
-atan2(T::FreeUnits, y::Number, x::Number) = uconvert(T, atan2(y, x)*myRad)
+atan2(T::FreeUnits, y::Number, x::Number) = uconvert(T, atan2(y, x)*u"rad")
 
 # Fun conversion between time and angles
 # NOTE: not sure if to use `convert` or `uconvert`
