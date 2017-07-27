@@ -1,14 +1,18 @@
 # UnitfulAngles
 
-[![Build Status](https://travis-ci.org/yakir12/UnitfulAngles.jl.svg?branch=master)](https://travis-ci.org/yakir12/UnitfulAngles.jl)
+[![travis][travis-img]](https://travis-ci.org/yakir12/UnitfulAngles.jl)
+[![coveralls][coveralls-img]](https://coveralls.io/github/yakir12/UnitfulAngles.jl)
+[![codecov][codecov-img]](http://codecov.io/github/yakir12/UnitfulAngles.jl)
 
-[![Coverage Status](https://coveralls.io/repos/yakir12/UnitfulAngles.jl/badge.svg?branch=master&service=github)](https://coveralls.io/github/yakir12/UnitfulAngles.jl?branch=master)
+[travis-img]: https://img.shields.io/travis/yakir12/UnitfulAngles.jl/master.svg?label=travis
+[coveralls-img]: https://img.shields.io/codecov/c/github/yakir12/UnitfulAngles.jl/master.svg?label=coveralls
+[codecov-img]: https://img.shields.io/codecov/c/github/yakir12/UnitfulAngles.jl/master.svg?label=codecov
 
-[![codecov.io](http://codecov.io/github/yakir12/UnitfulAngles.jl/coverage.svg?branch=master)](http://codecov.io/github/yakir12/UnitfulAngles.jl?branch=master)
+A supplemental units package for [Julia](https://julialang.org)'s [Unitful.jl](https://github.com/ajkeller34/Unitful.jl).
 
-A supplemental units package for `Unitful.jl`.
+`UnitfulAngles.jl` introduces all the angular units found in Wikipedia's articles [Angle § Units](https://en.wikipedia.org/wiki/Angle#Units), [Angular unit](https://en.wikipedia.org/wiki/Angular_unit) and [Circular sector](https://en.wikipedia.org/wiki/Circular_sector).
 
-`UnitfulAngles.jl` introduces all the angular units found in the wikipedia [angle-article](https://en.wikipedia.org/wiki/Angle#Units). In addition to the `Radian` and `Degree` units already available in `Unitful.jl`, the following units are introduced: `Turn`, `HalfTurn`, `Quadrant`, `Sextant`, `Octant`, `ClockPosition`, `HourAngle`, `CompassPoint`, `Hexacontade`, `BinaryRadian`, `DiameterPart`, `Gradian`, `Arcminute`, and `Arcsecond`.
+In addition to the `Radian` and `Degree` units already available in `Unitful.jl`, the following units are introduced: `Turn`, `HalfTurn`, `Quadrant`, `Sextant`, `Octant`, `ClockPosition`, `HourAngle`, `CompassPoint`, `Hexacontade`, `BinaryRadian`, `DiameterPart`, `Gradian`, `Arcminute`, and `Arcsecond`.
 
 ## Special features
 
