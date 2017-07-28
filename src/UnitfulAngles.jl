@@ -4,6 +4,7 @@ module UnitfulAngles
 
 using Unitful
 using Unitful: @unit, Quantity, NoDims, FreeUnits
+import Unitful: °, rad
 import Base: sin, cos, tan, sec, csc, cot, asin, acos, atan, asec, acsc, acot, atan2, convert
 export @u_str
 
