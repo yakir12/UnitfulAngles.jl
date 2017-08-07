@@ -25,32 +25,33 @@ julia> uconvert(u"clockPosition", 128u"brad")
 ## Special features
 
 - All the trigonometric functions (`sin`, `sinc`, `cos`, `cosc`, `tan`, `sec`, `csc`, and `cot`) work as expected:
-```julia
-julia> using UnitfulAngles
+  ```julia
+  julia
+  julia> using UnitfulAngles
 
-julia> import UnitfulAngles: °, rad, octant
+  julia> import UnitfulAngles: °, rad, octant
 
-julia> sin(30°)
-0.5
+  julia> sin(30°)
+  0.5
 
-julia> cos(π*rad)
--1.0
+  julia> cos(π*rad)
+  -1.0
 
-julia> tan(1octant)
-1.0
-```
+  julia> tan(1octant)
+  1.0
+  ```
 - In order to get inverse functions (`acos`, `acot`, `acsc`, `asec`, `asin`, `atan`, and `atan2`) to return a specific unit, specify the desired unit as the first argument: 
-```julia
-julia> import UnitfulAngles.turn
+  ```julia
+  julia> import UnitfulAngles.turn
 
-julia> asin(turn, 1)
-0.25 τ
-```
+  julia> asin(turn, 1)
+  0.25 τ
+  ```
 - As a bonus, you can also convert between an angle and `Dates.Time`:
-```julia
-julia> convert(Dates.Time, 200u"grad")
-12:00:00
+  ```julia
+  julia> convert(Dates.Time, 200u"grad")
+  12:00:00
 
-julia> convert(u"sextant", Dates.Time(4,0,0))
-1.0 sextant
-```
+  julia> convert(u"sextant", Dates.Time(4,0,0))
+  1.0 sextant
+  ```
