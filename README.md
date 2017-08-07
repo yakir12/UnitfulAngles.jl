@@ -26,7 +26,6 @@ julia> uconvert(u"clockPosition", 128u"brad")
 
 - All the trigonometric functions (`sin`, `sinc`, `cos`, `cosc`, `tan`, `sec`, `csc`, and `cot`) work as expected:
   ```julia
-  julia
   julia> using UnitfulAngles
 
   julia> import UnitfulAngles: °, rad, octant
