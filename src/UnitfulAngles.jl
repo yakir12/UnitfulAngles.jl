@@ -21,8 +21,8 @@ import Base: sin, cos, tan, sec, csc, cot, asin, acos, atan, asec, acsc, acot, a
 @unit brad          "brad"          BinaryRadian  turn//256     false
 @unit diameterPart  "diameterPart"  DiameterPart  1u"rad"/60    false
 @unit grad          "ᵍ"             Gradian       turn//400     false
-@unit arcminute     "′"             Arcminute     turn//21600   false
-@unit arcsecond     "″"             Arcsecond     turn//1296000 false
+@unit arcminute     "′"             Arcminute     u"°"//60   false
+@unit arcsecond     "″"             Arcsecond     u"°"//3600 false
 
 ######################### Functions ############################################
 
