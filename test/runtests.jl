@@ -2,11 +2,10 @@ using UnitfulAngles
 using Unitful
 using Base.Test
 
-units = (u"turn", u"halfTurn", u"quadrant", u"sextant", u"octant", u"clockPosition", u"hourAngle", u"compassPoint", u"hexacontade", u"brad", u"°", u"grad", u"arcminute", u"arcsecond", u"rad", u"diameterPart")
-quantities = (1, 2, 4, 6, 8, 12, 24, 32, 60, 256, 360, 400, 21600, 1296000, 2π, 120π)
+units = (u"turnturn", u"turn", u"halfTurn", u"quadrant", u"sextant", u"octant", u"clockPosition", u"hourAngle", u"compassPoint", u"hexacontade", u"brad", u"°", u"grad", u"arcminute", u"arcsecond", u"rad", u"diameterPart")
+quantities = (1, 2, 4, 8, 12, 16, 24, 48, 64, 120, 512, 720, 800, 43200, 2592000, 4π, 240π)
 
-@test all(1u"turn" ≈ q*u for (q, u) in zip(quantities, units))
-for _f in (:sin, :cos, :tan, :sec, :csc, :cot), (q, u) in zip(quantities, units), a in 13:17
+@test all(1u"turnturn" ≈ q*u for (q, u) in zip(quantities, units))for _f in (:sin, :cos, :tan, :sec, :csc, :cot), (q, u) in zip(quantities, units), a in 13:17
     @test @eval $_f(2π/$a) ≈ $_f($q*$u/$a)
 end
 
