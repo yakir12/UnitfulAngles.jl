@@ -44,7 +44,8 @@ for _f in (:tan, :sec, :csc, :cot)
 end
 
 # Inverse functions
-for _f in (:acos, :asin, :atan, :asec, :acsc, :acot), _u in (diameterPart, u"°", u"rad", turn, halfTurn, quadrant, sextant, octant, clockPosition, hourAngle, compassPoint, hexacontade, brad, grad, arcminute, arcsecond)
+for _f in (:acos, :asin, :atan, :asec, :acsc, :acot),
+    _u in (diameterPart, u"°", u"rad", turn, halfTurn, quadrant, sextant, octant, clockPosition, hourAngle, compassPoint, hexacontade, brad, grad, arcminute, arcsecond)
     @eval $_f(::typeof($_u), x::Number) = uconvert($_u, $_f(x)*u"rad")
 end
 
