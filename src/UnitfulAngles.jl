@@ -53,7 +53,7 @@ for _u in (diameterPart, u"°", u"rad", turn, halfTurn, quadrant, sextant, octan
 end
 
 # Fun conversion between time and angles
-# NOTE: not sure if to use `convert` or `uconvert`
+# NOTE: not sure whether to use `convert` or `uconvert`
 for _u in (diameterPart, u"°", u"rad", turn, halfTurn, quadrant, sextant, octant, clockPosition, hourAngle, compassPoint, hexacontade, brad, grad, arcminute, arcsecond)
     @eval begin
         function convert(::typeof($_u), t::Dates.Time)
@@ -65,8 +65,8 @@ for _u in (diameterPart, u"°", u"rad", turn, halfTurn, quadrant, sextant, octan
     @eval convert{T}(::Type{Dates.Time}, x::Quantity{T,typeof(NoDims),typeof($_u)}) = Dates.Time(0,0,0) + Dates.Nanosecond(round(Int, ustrip(uconvert(hourAngle, x))*3600000000000))
 end
 
-
-# As per the Unitful documentation
+# Enable precompilation with Unitful extended units
+# http://ajkeller34.github.io/Unitful.jl/stable/extending/#precompilation
 const localunits = Unitful.basefactors
 function __init__()
     merge!(Unitful.basefactors, localunits)
