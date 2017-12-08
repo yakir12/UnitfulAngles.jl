@@ -9,7 +9,7 @@ export @u_str
 import Base: sin, cos, tan, sec, csc, cot, asin, acos, atan, asec, acsc, acot, atan2, convert
 
 ######################### Angle units ##########################################
-@unit turn          "τ"             Turn          2π*u"rad"       false
+@unit turn          "τ"             Turn          2π*u"rad"     false
 @unit halfTurn      "π"             HalfTurn      turn//2       false
 @unit quadrant      "⦜"             Quadrant      turn//4       false
 @unit sextant       "sextant"       Sextant       turn//6       false
@@ -21,8 +21,8 @@ import Base: sin, cos, tan, sec, csc, cot, asin, acos, atan, asec, acsc, acot, a
 @unit brad          "brad"          BinaryRadian  turn//256     false
 @unit diameterPart  "diameterPart"  DiameterPart  1u"rad"/60    false
 @unit grad          "ᵍ"             Gradian       turn//400     false
-@unit arcminute     "′"             Arcminute     u"°"//60   false
-@unit arcsecond     "″"             Arcsecond     u"°"//3600 false
+@unit arcminute     "′"             Arcminute     u"°"//60      false
+@unit arcsecond     "″"             Arcsecond     u"°"//3600    false
 
 ######################### Functions ############################################
 
