@@ -12,7 +12,7 @@ A supplemental units package for [Julia](https://julialang.org)'s [Unitful.jl](h
 
 `UnitfulAngles.jl` introduces all the angular units found in Wikipedia's articles [Angle § Units](https://en.wikipedia.org/wiki/Angle#Units), [Angular unit](https://en.wikipedia.org/wiki/Angular_unit) and [Circular sector](https://en.wikipedia.org/wiki/Circular_sector).
 
-In addition to the `Radian` and `Degree` units already available in `Unitful.jl`, the following units are introduced: `Turn`, `HalfTurn`, `Quadrant`, `Sextant`, `Octant`, `ClockPosition`, `HourAngle`, `CompassPoint`, `Hexacontade`, `BinaryRadian`, `DiameterPart`, `Gradian`, `Arcminute`, and `Arcsecond`.
+In addition to the `Radian` and `Degree` units already available in `Unitful.jl`, the following units are introduced: `DoubleTurn`, `Turn`, `HalfTurn`, `Quadrant`, `Sextant`, `Octant`, `ClockPosition`, `HourAngle`, `CompassPoint`, `Hexacontade`, `BinaryRadian`, `DiameterPart`, `Gradian`, `Arcminute`, and `Arcsecond`.
 
 Because all the trigonometric functions work correctly regardless of the type of their argument, there is no need to convert between the units. However, to specifically convert one unit to the other, use `Unitful.jl`'s `uconvert` function:
 ```julia
