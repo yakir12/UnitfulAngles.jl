@@ -29,18 +29,18 @@ import Base: sin, cos, tan, sec, csc, cot, asin, acos, atan, asec, acsc, acot, a
 
 # cos and sin have *pi versions, and *d versions
 for _f in (:cos, :sin)
-    @eval $_f{T}(x::Quantity{T, typeof(NoDims), typeof(halfTurn)}) = $(Symbol("$(_f)pi"))(ustrip(x))
-    @eval $_f{T}(x::Quantity{T, typeof(NoDims), typeof(diameterPart)}) = $_f(ustrip(uconvert(u"rad", x)))
+    @eval $_f(x::Quantity{T, typeof(NoDims), typeof(halfTurn)}) where {T} = $(Symbol("$(_f)pi"))(ustrip(x))
+    @eval $_f(x::Quantity{T, typeof(NoDims), typeof(diameterPart)}) where {T} = $_f(ustrip(uconvert(u"rad", x)))
     for _u in (doubleTurn, turn, quadrant, sextant, octant, clockPosition, hourAngle, compassPoint, hexacontade, brad, grad, arcminute, arcsecond)
-        @eval $_f{T}(x::Quantity{T, typeof(NoDims), typeof($_u)}) = $(Symbol("$(_f)pi"))(ustrip(uconvert(halfTurn, x)))
+        @eval $_f(x::Quantity{T, typeof(NoDims), typeof($_u)}) where {T} = $(Symbol("$(_f)pi"))(ustrip(uconvert(halfTurn, x)))
     end
 end
 
 # These functions don't have *pi versions, but have *d versions
 for _f in (:tan, :sec, :csc, :cot)
-    @eval $_f{T}(x::Quantity{T, typeof(NoDims), typeof(diameterPart)}) = $_f(ustrip(uconvert(u"rad", x)))
+    @eval $_f(x::Quantity{T, typeof(NoDims), typeof(diameterPart)}) where {T} = $_f(ustrip(uconvert(u"rad", x)))
     for _u in (doubleTurn, turn, halfTurn, quadrant, sextant, octant, clockPosition, hourAngle, compassPoint, hexacontade, brad, grad, arcminute, arcsecond)
-        @eval $_f{T}(x::Quantity{T, typeof(NoDims), typeof($_u)}) = $(Symbol("$(_f)d"))(ustrip(uconvert(u"°", x)))
+        @eval $_f(x::Quantity{T, typeof(NoDims), typeof($_u)}) where {T} = $(Symbol("$(_f)d"))(ustrip(uconvert(u"°", x)))
     end
 end
 
@@ -64,7 +64,7 @@ for _u in (diameterPart, u"°", u"rad", doubleTurn, turn, halfTurn, quadrant, se
             uconvert($_u, x/convert(S, Dates.Hour(1))*hourAngle)
         end
     end
-    @eval convert{T}(::Type{Dates.Time}, x::Quantity{T, typeof(NoDims), typeof($_u)}) = Dates.Time(0, 0, 0) + Dates.Nanosecond(round(Int, ustrip(uconvert(hourAngle, x))*3600000000000))
+    @eval convert(::Type{Dates.Time}, x::Quantity{T, typeof(NoDims), typeof($_u)}) where {T} = Dates.Time(0, 0, 0) + Dates.Nanosecond(round(Int, ustrip(uconvert(hourAngle, x))*3600000000000))
 end
 
 # Enable precompilation with Unitful extended units
