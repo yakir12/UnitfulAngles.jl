@@ -1,9 +1,5 @@
 using Unitful, UnitfulAngles
-@static if VERSION < v"0.7.0-DEV.2005"
-    using Base.Test
-else
-    using Test
-end
+using Test
 
 units = (u"doubleTurn", u"turn", u"halfTurn", u"quadrant", u"sextant", u"octant", u"clockPosition", u"hourAngle", u"compassPoint", u"hexacontade", u"brad", u"°", u"grad", u"arcminute", u"arcsecond", u"rad", u"diameterPart")
 quantities = (0.5, 1, 2, 4, 6, 8, 12, 24, 32, 60, 256, 360, 400, 21600, 1296000, 2π, 120π)
@@ -17,7 +13,7 @@ for (_f, _x) in zip((:asin, :acos, :atan, :asec, :acsc, :acot), (.5, √3/2, √
     @test @eval $_f(u"°", $_x) ≈ 30u"°"
 end
 
-@test atan2(u"°", 1,1) == 45u"°"
+@test atan(u"°", 1,1) == 45u"°"
 
 @test convert(Dates.Time, 45u"°") == Dates.Time(3,0,0)
 
