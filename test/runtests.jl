@@ -1,4 +1,5 @@
 using Unitful, UnitfulAngles
+import Dates
 @static if VERSION < v"0.7.0-DEV.2005"
     using Base.Test
 else
@@ -17,7 +18,7 @@ for (_f, _x) in zip((:asin, :acos, :atan, :asec, :acsc, :acot), (.5, √3/2, √
     @test @eval $_f(u"°", $_x) ≈ 30u"°"
 end
 
-@test atan2(u"°", 1,1) == 45u"°"
+@test atan(u"°", 1,1) == 45u"°"
 
 @test convert(Dates.Time, 45u"°") == Dates.Time(3,0,0)
 

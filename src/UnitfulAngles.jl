@@ -3,10 +3,11 @@ __precompile__(true)
 module UnitfulAngles
 
 using Unitful
+import Dates
 using Unitful: @unit, Quantity, NoDims
 export @u_str
 
-import Base: sin, cos, tan, sec, csc, cot, asin, acos, atan, asec, acsc, acot, atan2, convert
+import Base: sin, cos, tan, sec, csc, cot, asin, acos, atan, asec, acsc, acot, convert
 
 ######################### Angle units ##########################################
 @unit doubleTurn    "§"             DoubleTurn    4π*u"rad"     false # = 2*turn
@@ -51,7 +52,7 @@ for _f in (:acos, :asin, :atan, :asec, :acsc, :acot),
 end
 
 for _u in (diameterPart, u"°", u"rad", doubleTurn, turn, halfTurn, quadrant, sextant, octant, clockPosition, hourAngle, compassPoint, hexacontade, brad, grad, arcminute, arcsecond)
-    @eval atan2(::typeof($_u), y::Number, x::Number) = uconvert($_u, atan2(y, x)*u"rad")
+    @eval atan(::typeof($_u), y::Number, x::Number) = uconvert($_u, atan(y, x)*u"rad")
 end
 
 # Fun conversion between time and angles
