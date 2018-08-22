@@ -1,12 +1,8 @@
 # UnitfulAngles
 
-[![travis][travis-img]](https://travis-ci.org/yakir12/UnitfulAngles.jl)
-[![coveralls][coveralls-img]](https://coveralls.io/github/yakir12/UnitfulAngles.jl)
-[![codecov][codecov-img]](http://codecov.io/github/yakir12/UnitfulAngles.jl)
-
-[travis-img]: https://img.shields.io/travis/yakir12/UnitfulAngles.jl/master.svg?label=travis
-[coveralls-img]: https://img.shields.io/codecov/c/github/yakir12/UnitfulAngles.jl/master.svg?label=coveralls
-[codecov-img]: https://img.shields.io/codecov/c/github/yakir12/UnitfulAngles.jl/master.svg?label=codecov
+[![Build status](https://ci.appveyor.com/api/projects/status/vhjolqjp4x0g4khi?svg=true)](https://ci.appveyor.com/project/yakir12/unitfulangles-jl)
+[![Build Status](https://travis-ci.org/yakir12/UnitfulAngles.jl.svg?branch=master)](https://travis-ci.org/yakir12/UnitfulAngles.jl)
+[![Coverage Status](https://coveralls.io/repos/github/yakir12/UnitfulAngles.jl/badge.svg?branch=master)](https://coveralls.io/github/yakir12/UnitfulAngles.jl?branch=master)
 
 A supplemental units package for [Julia](https://julialang.org)'s [Unitful.jl](https://github.com/ajkeller34/Unitful.jl).
 
