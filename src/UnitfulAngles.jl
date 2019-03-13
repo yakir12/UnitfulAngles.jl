@@ -1,15 +1,14 @@
 module UnitfulAngles
 
-using Unitful
+import Unitful
 import Dates
-using Unitful: @unit, Quantity, NoDims
-export @u_str
-
+using Unitful: @unit, Quantity, NoDims, @u_str, uconvert, ustrip
 import Base: sin, cos, tan, sec, csc, cot, asin, acos, atan, asec, acsc, acot, convert
 
+
 ######################### Angle units ##########################################
-@unit doubleTurn    "§"             DoubleTurn    4π*u"rad"     false # = 2*turn
 @unit turn          "τ"             Turn          2π*u"rad"     false
+@unit doubleTurn    "§"             DoubleTurn    2turn         false
 @unit halfTurn      "π"             HalfTurn      turn//2       false
 @unit quadrant      "⦜"             Quadrant      turn//4       false
 @unit sextant       "sextant"       Sextant       turn//6       false
@@ -28,18 +27,18 @@ import Base: sin, cos, tan, sec, csc, cot, asin, acos, atan, asec, acsc, acot, c
 
 # cos and sin have *pi versions, and *d versions
 for _f in (:cos, :sin)
-    @eval $_f(x::Quantity{T, typeof(NoDims), typeof(halfTurn)}) where {T} = $(Symbol("$(_f)pi"))(ustrip(x))
-    @eval $_f(x::Quantity{T, typeof(NoDims), typeof(diameterPart)}) where {T} = $_f(ustrip(uconvert(u"rad", x)))
+    @eval $_f(x::Quantity{T, NoDims, typeof(halfTurn)}) where {T} = $(Symbol("$(_f)pi"))(ustrip(x))
+    @eval $_f(x::Quantity{T, NoDims, typeof(diameterPart)}) where {T} = $_f(ustrip(uconvert(u"rad", x)))
     for _u in (doubleTurn, turn, quadrant, sextant, octant, clockPosition, hourAngle, compassPoint, hexacontade, brad, grad, arcminute, arcsecond)
-        @eval $_f(x::Quantity{T, typeof(NoDims), typeof($_u)}) where {T} = $(Symbol("$(_f)pi"))(ustrip(uconvert(halfTurn, x)))
+        @eval $_f(x::Quantity{T, NoDims, typeof($_u)}) where {T} = $(Symbol("$(_f)pi"))(ustrip(uconvert(halfTurn, x)))
     end
 end
 
 # These functions don't have *pi versions, but have *d versions
 for _f in (:tan, :sec, :csc, :cot)
-    @eval $_f(x::Quantity{T, typeof(NoDims), typeof(diameterPart)}) where {T} = $_f(ustrip(uconvert(u"rad", x)))
+    @eval $_f(x::Quantity{T, NoDims, typeof(diameterPart)}) where {T} = $_f(ustrip(uconvert(u"rad", x)))
     for _u in (doubleTurn, turn, halfTurn, quadrant, sextant, octant, clockPosition, hourAngle, compassPoint, hexacontade, brad, grad, arcminute, arcsecond)
-        @eval $_f(x::Quantity{T, typeof(NoDims), typeof($_u)}) where {T} = $(Symbol("$(_f)d"))(ustrip(uconvert(u"°", x)))
+        @eval $_f(x::Quantity{T, NoDims, typeof($_u)}) where {T} = $(Symbol("$(_f)d"))(ustrip(uconvert(u"°", x)))
     end
 end
 
@@ -63,7 +62,7 @@ for _u in (diameterPart, u"°", u"rad", doubleTurn, turn, halfTurn, quadrant, se
             uconvert($_u, x/convert(S, Dates.Hour(1))*hourAngle)
         end
     end
-    @eval convert(::Type{Dates.Time}, x::Quantity{T, typeof(NoDims), typeof($_u)}) where {T} = Dates.Time(0, 0, 0) + Dates.Nanosecond(round(Int, ustrip(uconvert(hourAngle, x))*3600000000000))
+    @eval convert(::Type{Dates.Time}, x::Quantity{T, NoDims, typeof($_u)}) where {T} = Dates.Time(0, 0, 0) + Dates.Nanosecond(round(Int, ustrip(uconvert(hourAngle, x))*3600000000000))
 end
 
 # Enable precompilation with Unitful extended units
