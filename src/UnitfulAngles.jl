@@ -52,14 +52,15 @@ for _u in (diameterPart, u"°", u"rad", doubleTurn, turn, halfTurn, quadrant, se
     @eval atan(::typeof($_u), y::Number, x::Number) = uconvert($_u, atan(y, x)*u"rad")
 end
 
+_tohour(x::T) where {T <: Dates.TimePeriod} = x/convert(T, Dates.Hour(1)) # credit to kristoffer.carlsson see https://discourse.julialang.org/t/convert-time-interval-to-seconds/3806/2
+
 # Fun conversion between time and angles
 # NOTE: not sure whether to use `convert` or `uconvert`
 for _u in (diameterPart, u"°", u"rad", doubleTurn, turn, halfTurn, quadrant, sextant, octant, clockPosition, hourAngle, compassPoint, hexacontade, brad, grad, arcminute, arcsecond)
     @eval begin
         function convert(::typeof($_u), t::Dates.Time)
             x = t - Dates.Time(0, 0, 0)
-            S = typeof(x)
-            uconvert($_u, x/convert(S, Dates.Hour(1))*hourAngle)
+            uconvert($_u, _tohour(x)*hourAngle)
         end
     end
     @eval convert(::Type{Dates.Time}, x::Quantity{T, NoDims, typeof($_u)}) where {T} = Dates.Time(0, 0, 0) + Dates.Nanosecond(round(Int, ustrip(uconvert(hourAngle, x))*3600000000000))
