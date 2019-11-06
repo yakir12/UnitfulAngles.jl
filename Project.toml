@@ -1,7 +1,7 @@
 name = "UnitfulAngles"
 uuid = "6fb2a4bd-7999-5318-a3b2-8ad61056cd98"
 
-version = "0.1.0"
+version = "0.16.0"
 
 [deps]
 Dates = "ade2ca70-3891-5945-98fb-dc099432e06a"
