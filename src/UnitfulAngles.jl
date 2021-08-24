@@ -7,21 +7,23 @@ import Base: sin, cos, tan, sec, csc, cot, asin, acos, atan, asec, acsc, acot, c
 
 
 ######################### Angle units ##########################################
-@unit turn          "τ"             Turn          2π*u"rad"     false
-@unit doubleTurn    "§"             DoubleTurn    2turn         false
-@unit halfTurn      "π"             HalfTurn      turn//2       false
-@unit quadrant      "⦜"             Quadrant      turn//4       false
-@unit sextant       "sextant"       Sextant       turn//6       false
-@unit octant        "octant"        Octant        turn//8       false
-@unit clockPosition "clockPosition" ClockPosition turn//12      false
-@unit hourAngle     "hourAngle"     HourAngle     turn//24      false
-@unit compassPoint  "compassPoint"  CompassPoint  turn//32      false
-@unit hexacontade   "hexacontade"   Hexacontade   turn//60      false
-@unit brad          "brad"          BinaryRadian  turn//256     false
-@unit diameterPart  "diameterPart"  DiameterPart  1u"rad"/60    false # ≈ turn/377
-@unit grad          "ᵍ"             Gradian       turn//400     false
-@unit arcminute     "′"             Arcminute     u"°"//60      false # = turn/21,600
-@unit arcsecond     "″"             Arcsecond     u"°"//3600    false # = turn/1,296,000
+@unit turn          "τ"             Turn           2π*u"rad"     false
+@unit doubleTurn    "§"             DoubleTurn     2turn         false
+@unit halfTurn      "π"             HalfTurn       turn//2       false
+@unit quadrant      "⦜"             Quadrant       turn//4       false
+@unit sextant       "sextant"       Sextant        turn//6       false
+@unit octant        "octant"        Octant         turn//8       false
+@unit clockPosition "clockPosition" ClockPosition  turn//12      false
+@unit hourAngle     "hourAngle"     HourAngle      turn//24      false
+@unit compassPoint  "compassPoint"  CompassPoint   turn//32      false
+@unit hexacontade   "hexacontade"   Hexacontade    turn//60      false
+@unit brad          "brad"          BinaryRadian   turn//256     false
+@unit diameterPart  "diameterPart"  DiameterPart   1u"rad"/60    false # ≈ turn/377
+@unit grad          "ᵍ"             Gradian        turn//400     false
+@unit arcminute     "′"             Arcminute      u"°"//60      false # = turn/21,600
+@unit arcsecond     "″"             Arcsecond      u"°"//3600    false # = turn/1,296,000
+# enable shorthand for arcseconds: e.g., 'mas' - milliarcsecond
+@unit as            "as"            ArcsecondShort u"°"//3600    true
 
 ######################### Functions ############################################
 
