@@ -12,7 +12,7 @@ In addition to the `Radian` and `Degree` units already available in `Unitful.jl`
 
 Because all the trigonometric functions work correctly regardless of the type of their argument, there is no need to convert between the units. However, to specifically convert one unit to the other, use `Unitful.jl`'s `uconvert` function:
 ```julia
-julia> using Unitful
+julia> using Unitful, UnitfulAngles
 
 julia> uconvert(u"clockPosition", 128u"brad")
 6//1 clockPosition
@@ -35,7 +35,7 @@ julia> uconvert(u"clockPosition", 128u"brad")
   julia> tan(1octant)
   1.0
   ```
-- In order to get inverse functions (`acos`, `acot`, `acsc`, `asec`, `asin`, `atan`, and `atan2`) to return a specific unit, specify the desired unit as the first argument: 
+- In order to get inverse functions (`acos`, `acot`, `acsc`, `asec`, `asin`, `atan`, and `atan2`) to return a specific unit, specify the desired unit as the first argument:
   ```julia
   julia> import UnitfulAngles.turn
 
@@ -44,6 +44,8 @@ julia> uconvert(u"clockPosition", 128u"brad")
   ```
 - As a bonus, you can also convert between an angle and `Dates.Time`:
   ```julia
+  julia> using Unitful, UnitfulAngles, Dates
+
   julia> convert(Dates.Time, 200u"grad")
   12:00:00
 
