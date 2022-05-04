@@ -23,7 +23,7 @@ import Base: sin, cos, tan, sec, csc, cot, asin, acos, atan, asec, acsc, acot, c
 @unit arcminute     "′"             Arcminute      °//60         false # = turn/21,600
 @unit arcsecond     "″"             Arcsecond      °//3600       false # = turn/1,296,000
 # enable shorthand for arcseconds: e.g., 'mas' - milliarcsecond
-@unit as            "as"            ArcsecondShort °//3600    true
+@unit as            "as"            ArcsecondShort °//3600       true
 
 ######################### Functions ############################################
 
