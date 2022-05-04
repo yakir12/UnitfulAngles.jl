@@ -18,7 +18,7 @@ import Base: sin, cos, tan, sec, csc, cot, asin, acos, atan, asec, acsc, acot, c
 @unit compassPoint  "compassPoint"  CompassPoint   turn//32      false
 @unit hexacontade   "hexacontade"   Hexacontade    turn//60      false
 @unit brad          "brad"          BinaryRadian   turn//256     false
-@unit diameterPart  "diameterPart"  DiameterPart   1rad/60       false # ≈ turn/377
+@unit diameterPart  "diameterPart"  DiameterPart   rad/60        false # ≈ turn/377
 @unit grad          "ᵍ"             Gradian        turn//400     false
 @unit arcminute     "′"             Arcminute      °//60         false # = turn/21,600
 @unit arcsecond     "″"             Arcsecond      °//3600       false # = turn/1,296,000
