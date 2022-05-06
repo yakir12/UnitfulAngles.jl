@@ -2,7 +2,8 @@ module UnitfulAngles
 
 import Unitful
 import Dates
-using Unitful: @unit, Quantity, NoDims, @u_str, uconvert, ustrip, rad, °
+using Unitful: @unit, Quantity, NoDims, @u_str, uconvert, ustrip
+import Unitful: rad, °
 import Base: sin, cos, tan, sec, csc, cot, asin, acos, atan, asec, acsc, acot, convert
 
 
@@ -30,9 +31,9 @@ import Base: sin, cos, tan, sec, csc, cot, asin, acos, atan, asec, acsc, acot, c
 # cos and sin have *pi versions, and *d versions
 for _f in (:cos, :sin)
     @eval $_f(x::Quantity{T, NoDims, typeof(halfTurn)}) where {T} = $(Symbol("$(_f)pi"))(ustrip(x))
-    @eval $_f(x::Quantity{T, NoDims, typeof(diameterPart)}) where {T} = $_f(ustrip(uconvert(rad, x)))
+    @eval $_f(x::Quantity{T, NoDims, typeof(diameterPart)}) where {T} = $_f(ustrip(uconvert(rad, float(x))))
     for _u in (doubleTurn, turn, quadrant, sextant, octant, clockPosition, hourAngle, compassPoint, hexacontade, brad, grad, arcminute, arcsecond)
-        @eval $_f(x::Quantity{T, NoDims, typeof($_u)}) where {T} = $(Symbol("$(_f)pi"))(ustrip(uconvert(halfTurn, x)))
+        @eval $_f(x::Quantity{T, NoDims, typeof($_u)}) where {T} = $(Symbol("$(_f)pi"))(ustrip(uconvert(halfTurn, float(x))))
     end
 end
 
@@ -40,7 +41,7 @@ end
 for _f in (:tan, :sec, :csc, :cot)
     @eval $_f(x::Quantity{T, NoDims, typeof(diameterPart)}) where {T} = $_f(ustrip(uconvert(rad, x)))
     for _u in (doubleTurn, turn, halfTurn, quadrant, sextant, octant, clockPosition, hourAngle, compassPoint, hexacontade, brad, grad, arcminute, arcsecond)
-        @eval $_f(x::Quantity{T, NoDims, typeof($_u)}) where {T} = $(Symbol("$(_f)d"))(ustrip(uconvert(°, x)))
+        @eval $_f(x::Quantity{T, NoDims, typeof($_u)}) where {T} = $(Symbol("$(_f)d"))(ustrip(uconvert(°, float(x))))
     end
 end
 
