@@ -73,7 +73,7 @@ end
 
 # Enable precompilation with Unitful extended units
 # http://ajkeller34.github.io/Unitful.jl/stable/extending/#precompilation
-const localunits = Unitful.basefactors
+const localunits = copy(Unitful.basefactors)
 function __init__()
     merge!(Unitful.basefactors, localunits)
     Unitful.register(UnitfulAngles)
