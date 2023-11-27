@@ -8,7 +8,7 @@ import Base: sin, cos, tan, sec, csc, cot, asin, acos, atan, asec, acsc, acot, c
 
 
 ######################### Angle units ############################################
-@unit turn           "τ"             Turn           2π*rad                   false
+@unit turn           "τ"             Turn           360°                     false
 @unit doubleTurn     "§"             DoubleTurn     2turn                    false
 @unit halfTurn       "π"             HalfTurn       turn//2                  false
 @unit quadrant       "⦜"             Quadrant       turn//4                  false
@@ -24,8 +24,8 @@ import Base: sin, cos, tan, sec, csc, cot, asin, acos, atan, asec, acsc, acot, c
 @unit arcminute      "′"             Arcminute      °//60                    false # = turn/21,600
 @unit arcsecond      "″"             Arcsecond      °//3600                  false # = turn/1,296,000
 # enable shorthand for arcseconds: e.g., 'mas' - milliarcsecond
-@unit mas            "mas"           Milliarcsecond arcsecond//1_000         false 
-@unit μas            "μas"           Microarcsecond arcsecond//1_000_000     false 
+@unit mas            "mas"           Milliarcsecond arcsecond//1_000         false
+@unit μas            "μas"           Microarcsecond arcsecond//1_000_000     false
 @unit pas            "pas"           Picoarcsecond  arcsecond//1_000_000_000 false
 
 ######################### Functions ##############################################
