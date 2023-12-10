@@ -4,7 +4,7 @@ using Test
 
 units = (u"doubleTurn", u"turn", u"halfTurn", u"quadrant", u"sextant", u"octant", u"clockPosition", u"hourAngle", u"compassPoint", u"hexacontade", u"brad", u"°", u"grad", u"arcminute", u"arcsecond", u"mas", u"μas", u"pas", u"rad", u"diameterPart",
 )
-quantities = (0.5, 1, 2, 4, 6, 8, 12, 24, 32, 60, 256, 360, 400, 21600, 1296000, 1296e6, 1296e9, 1296e12, 2π, 120π)
+quantities = (0.5, 1, 2, 4, 6, 8, 12, 24, 32, 60, 256, 360, 400, 21600, 1296000, 1296e6, 1296e9, 1296e15, 2π, 120π)
 
 @test all(1u"turn" ≈ q*u for (q, u) in zip(quantities, units))
 for _f in (:sin, :cos, :tan, :sec, :csc, :cot), (q, u) in zip(quantities, units), a in 13:17
@@ -25,4 +25,3 @@ end
 # for _f in (:sin, :cos), (q, u) in zip(qrats, rats)
     # @test @eval $(Symbol("$(_f)pi"))(2) === $_f($q*$u)
 # end
-
